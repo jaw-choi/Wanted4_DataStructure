@@ -12,11 +12,13 @@ class Node
     // 노드의 생성은 LinkedList 클래스에서만 가능하도록 private 으로 설정.
 private:
 
-    Node();
-    Node(T data);
-    //    : data(data), next(nullptr)
-    //{
-    //}
+    Node()
+    {
+    }
+    Node(T data)
+        : data(data), next(nullptr)
+    {
+    }
 
 
 private:
@@ -25,5 +27,3 @@ private:
     // 다음 노드를 가리키는 링크 필드.
     Node* next = nullptr;
 };
-
-#include "Node.inl"
