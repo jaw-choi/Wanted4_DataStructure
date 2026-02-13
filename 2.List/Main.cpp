@@ -10,7 +10,18 @@ int main()
     {
         list.Add(i * 10);
     }
-    std::vector<int> a;
-    a.push_back(10);
+    
+    // Range-based for loop.
+    for (const int item : list)
+    {
+        std::cout << item << std::endl;
+    }
+
+    // 초기식 , 조건식, 증감식
+    // Iterator 사용한 반복문.
+    //for (List<int>::ListIterator it = list.begin(); it != list.end(); ++it)
+    //{
+    //    std::cout << (*it) << std::endl;
+    //}
     return 0;
 }
