@@ -95,7 +95,7 @@ class List
 {
 public:
     using ValueType = T;
-    using ListIterator = ListIterator< List<T> >;
+    using Iterator = ListIterator< List<T> >;
 public:
     List()
     {
@@ -151,7 +151,9 @@ public:
     T& operator[](int index)
     {
         // index 범위 확인.
-        assert(index < 0 || index >= size);
+        // assert는 통과 조건을 넣어야 함.
+        assert(index >= 0 && index < size);
+        //assert(index < 0 || index >= size);
         return data[index];
     }
 
@@ -161,8 +163,8 @@ public:
 
     // 범위 기반 루프 처리를 위한 함수 작성 (begin/end).
     // 배열의 첫 위치를 반환하는 함수.
-    //Iterator begin()
-    T* begin()
+    Iterator begin()
+    //T* begin()
     {
         //return Iterator(data);
         return data;

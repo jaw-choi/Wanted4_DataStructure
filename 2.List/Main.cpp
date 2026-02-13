@@ -19,9 +19,9 @@ int main()
 
     // 초기식 , 조건식, 증감식
     // Iterator 사용한 반복문.
-    //for (List<int>::ListIterator it = list.begin(); it != list.end(); ++it)
-    //{
-    //    std::cout << (*it) << std::endl;
-    //}
+    for (List<int>::Iterator it = list.begin(); it != list.end(); ++it)
+    {
+        std::cout << (*it) << std::endl;
+    }
     return 0;
 }
