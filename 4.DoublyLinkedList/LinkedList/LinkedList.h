@@ -23,13 +23,13 @@ public:
             __debugbreak();
         }
         // 메모리 정리.
-        //Clear();
+        Clear();
 
-        //delete first;
-        //first = nullptr;
+        delete first;
+        first = nullptr;
 
-        //delete last;
-        //last = nullptr;
+        delete last;
+        last = nullptr;
     }
     // 출력 함수.
     void Print()

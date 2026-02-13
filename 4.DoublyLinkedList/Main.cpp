@@ -19,9 +19,6 @@ int main()
 
     std::cout << "노드 삭제 후 출력\n";
     list.Print();
-    if (_heapchk() != _HEAPOK)
-    {
-        __debugbreak();
-    }
+
     return 0;
 }
