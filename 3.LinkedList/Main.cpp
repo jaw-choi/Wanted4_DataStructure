@@ -1,5 +1,8 @@
 ﻿#include <iostream>
 #include "LinkedList/LinkedList.h"
+#include <list>
+#include <forward_list>
+
 int main()
 {
     LinkedList<int> list;
