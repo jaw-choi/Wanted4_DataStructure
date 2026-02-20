@@ -16,6 +16,7 @@
     <ProjectGuid>{bb1f36e9-5011-46c9-8753-6cf18a970490}</ProjectGuid>
     <RootNamespace>My5Stack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>05.Stack</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

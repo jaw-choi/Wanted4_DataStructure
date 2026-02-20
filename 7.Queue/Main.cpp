@@ -1,31 +1,27 @@
-#include "Container/Queue.h"
+ï»¿#include <iostream>
+#include "Container/Deque.h"
 
 int main()
 {
-	// Å¥ °´Ã¼ »ý¼º.
-	Queue<int> queue;
-	const int count = 10;
-	for (int ix = 0; ix < count; ++ix)
+    Deque<int, 10> deque;
+
+    for (int ix = 1; ix < 10; ++ix)
+    {
+	if (ix % 2 != 0)
 	{
-		queue.Enqueue(ix + 1);
+	    deque.AddFront(ix);
 	}
+	else
+	{
+	    deque.AddRear(ix);
+	}
+    }
 
-	// Ãâ·Â.
-	queue.Print();
+    deque.Display();
+    deque.DeleteFront();
+    deque.DeleteRear();
+    deque.DeleteFront();
+    deque.Display();
 
-	// °ª ÃßÃâ.
-	int value;
-	queue.Dequeue(value);
-	queue.Dequeue(value);
-	queue.Dequeue(value);
-
-	queue.Print();
-
-	// °ª Ãß°¡.
-	queue.Enqueue(11);
-	queue.Enqueue(12);
-	queue.Enqueue(13);
-	queue.Enqueue(14);
-
-	std::cin.get();
+    std::cin.get();
 }

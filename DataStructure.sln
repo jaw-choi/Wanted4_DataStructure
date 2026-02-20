@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36804.6
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.Array", "1.Array\1.Array.vcxproj", "{EA0FC48E-3AA8-4176-93EB-75C44E09A469}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8.QueueMaze", "8.QueueMaze\8.QueueMaze.vcxproj", "{342FD02F-83A5-45CA-8614-307FDDBC0639}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.HashTable", "9.HashTable\9.HashTable.vcxproj", "{C6CF7CF7-9950-40E1-98D9-AC122117242E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10.Tree", "10.Tree\10.Tree.vcxproj", "{8CD33141-91FA-4C25-9B58-E500FE00FE3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{C6CF7CF7-9950-40E1-98D9-AC122117242E}.Debug|x64.Build.0 = Debug|x64
 		{C6CF7CF7-9950-40E1-98D9-AC122117242E}.Release|x64.ActiveCfg = Release|x64
 		{C6CF7CF7-9950-40E1-98D9-AC122117242E}.Release|x64.Build.0 = Release|x64
+		{8CD33141-91FA-4C25-9B58-E500FE00FE3D}.Debug|x64.ActiveCfg = Debug|x64
+		{8CD33141-91FA-4C25-9B58-E500FE00FE3D}.Debug|x64.Build.0 = Debug|x64
+		{8CD33141-91FA-4C25-9B58-E500FE00FE3D}.Release|x64.ActiveCfg = Release|x64
+		{8CD33141-91FA-4C25-9B58-E500FE00FE3D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

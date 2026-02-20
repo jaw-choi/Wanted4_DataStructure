@@ -16,6 +16,7 @@
     <ProjectGuid>{342fd02f-83a5-45ca-8614-307fddbc0639}</ProjectGuid>
     <RootNamespace>My8QueueMaze</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>08.QueueMaze</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
