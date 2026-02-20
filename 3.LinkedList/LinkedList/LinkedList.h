@@ -1,155 +1,189 @@
-ï»¿#pragma once
+#pragma once
 
 #include "Node.h"
 #include <iostream>
 
-// ë‹¨ì¼ ì—°ê²° ë¦¬ìŠ¤íŠ¸ í´ë˜ìŠ¤.
-// Nodeë¥¼ ë‚´ë¶€ì—ì„œ ê´€ë¦¬.
-// ì •ë ¬ ê¸°ë°˜ìœ¼ë¡œ ë…¸ë“œ ì¶”ê°€ (ì „ì œ: ë¹„êµê°€ ê°€ëŠ¥í•´ì•¼ í•¨).
+// ¸Ş¸ğ¸® ·¹ÀÌ¾Æ¿ô.
+//class Test
+//{
+//	int value;
+//	int* test;
+//};
+
+// ´ÜÀÏ ¿¬°á ¸®½ºÆ® Å¬·¡½º.
+// Node¸¦ ³»ºÎ¿¡¼­ °ü¸®.
+// Á¤·Ä ±â¹İÀ¸·Î ³ëµå Ãß°¡ (ÀüÁ¦: ºñ±³°¡ °¡´ÉÇØ¾ß ÇÔ).
 template<typename T>
 class LinkedList
 {
-    // íƒ€ì… ì•Œë¦¬ì•„ì‹± ì§€ì •.
-    using NodeType = Node<T>*;
+	// Å¸ÀÔ ¾Ë¸®¾Æ½Ì ÁöÁ¤.
+	using NodeType = Node<T>*;
 
 public:
-    LinkedList()
-	: head(nullptr), count(0)
-    {
-    }
-    ~LinkedList()
-    {
-	// Todo: ë©”ëª¨ë¦¬ ì •ë¦¬.
-    }
-
-    // ë…¸ë“œ ì¶”ê°€ í•¨ìˆ˜.
-    void Insert(const T& data)
-    {
-	// ìƒˆë…¸ë“œ ìƒì„±.
-	NodeType newNode = new Node<T>(data);
-
-	// ë…¸ë“œë¥¼ ì‚½ì…í•  ìœ„ì¹˜ í™•ì¸.
-
-	// í—¤ë“œê°€ ë¹ˆ ìƒíƒœì¸ì§€ í™•ì¸.
-	if (!head)
+	LinkedList()
+		: head(nullptr), count(0)
 	{
-	    // í—¤ë“œ ë…¸ë“œë¥¼ ìƒˆ ë…¸ë“œë¡œ ì§€ì •.
-	    head = newNode;
 	}
-
-	// í—¤ë“œê°€ ìˆìœ¼ë©´ ì¶”ê°€í•  ìœ„ì¹˜ ê²€ìƒ‰ í›„ ì¶”ê°€.
-	else
+	
+	~LinkedList()
 	{
-	    // ìë¦¬ ê²€ìƒ‰ì„ ìœ„í•œ ë³€ìˆ˜.
-	    NodeType current = head;
-	    NodeType trail = nullptr;
+		// ¸Ş¸ğ¸® Á¤¸®.
+		NodeType current = head;
+		NodeType next = nullptr;
 
-	    // ìë¦¬ ê²€ìƒ‰.
-	    while (current)
-	    {
-		// ê°’ ë¹„êµ.
-		if (current->data >= data)
+		// ¼øÈ¸ÇÏ¸é¼­ ¸Ş¸ğ¸® ÇØÁ¦.
+		while (current)
 		{
-		    break;
+			// »èÁ¦ÇÏ±â Àü¿¡ ´ÙÀ½ ³ëµå ¹Ì¸® ÀúÀå.
+			next = current->next;
+
+			// »èÁ¦.
+			delete current;
+
+			// ´ÙÀ½ ³ëµå·Î ÀÌµ¿.
+			current = next;
 		}
 
-		// ë‹¤ìŒ ë…¸ë“œë¡œ ê²€ìƒ‰ ì´ì–´ê°€ê¸°.
-		trail = current;
-		current = current->next;
-	    }
-
-	    // ê²€ìƒ‰í•œ ìœ„ì¹˜ê°€ í—¤ë“œì¸ ê²½ìš°.
-	    if (current == head)
-	    {
-		// newNodeë¥¼ í—¤ë“œë¡œ ì „í™˜.
-		newNode->next = head;
-		head = newNode;
-	    }
-
-	    // í—¤ë“œê°€ ì•„ë‹Œ ê²½ìš°.
-	    else
-	    {
-		// ì‚½ì…í•  ìœ„ì¹˜ì—ì„œ í¬ì¸í„° ì •ë¦¬.
-		newNode->next = current;
-		trail->next = newNode;
-	    }
+		// Á¤¸®.
+		head = nullptr;
+		count = 0;
 	}
 
-	// ì €ì¥ ê°œìˆ˜ ì¦ê°€.
-	++count;
-    }
-
-    void Delete(const T& data)
-    {
-	if (!head)
+	// ³ëµå Ãß°¡ ÇÔ¼ö.
+	void Insert(const T& data)
 	{
-            std::cout << "List is empty. Cannot delete.\n";
-            return;
+		// »õ³ëµå »ı¼º.
+		NodeType newNode = new Node<T>(data);
+
+		// ³ëµå¸¦ »ğÀÔÇÒ À§Ä¡ È®ÀÎ.
+
+		// Çìµå°¡ ºó »óÅÂÀÎÁö È®ÀÎ.
+		if (!head)
+		{
+			// Çìµå ³ëµå¸¦ »õ ³ëµå·Î ÁöÁ¤.
+			head = newNode;
+		}
+
+		// Çìµå°¡ ÀÖÀ¸¸é Ãß°¡ÇÒ À§Ä¡ °Ë»ö ÈÄ Ãß°¡.
+		else
+		{
+			// ÀÚ¸® °Ë»öÀ» À§ÇÑ º¯¼ö.
+			NodeType current = head;
+			NodeType trail = nullptr;
+
+			// ÀÚ¸® °Ë»ö.
+			while (current)
+			{
+				// °ª ºñ±³.
+				if (current->data >= data)
+				{
+					break;
+				}
+
+				// ´ÙÀ½ ³ëµå·Î °Ë»ö ÀÌ¾î°¡±â.
+				trail = current;
+				current = current->next;
+			}
+
+			// °Ë»öÇÑ À§Ä¡°¡ ÇìµåÀÎ °æ¿ì.
+			if (current == head)
+			{
+				// newNode¸¦ Çìµå·Î ÀüÈ¯.
+				newNode->next = head;
+				head = newNode;
+			}
+
+			// Çìµå°¡ ¾Æ´Ñ °æ¿ì.
+			else
+			{
+				// »ğÀÔÇÒ À§Ä¡¿¡¼­ Æ÷ÀÎÅÍ Á¤¸®.
+				newNode->next = current;
+				trail->next = newNode;
+			}
+		}
+
+		// ÀúÀå °³¼ö Áõ°¡.
+		++count;
 	}
 
-        // ì‚­ì œí•  ë…¸ë“œ ê²€ìƒ‰.
-        NodeType current = head;
-        NodeType trail = nullptr;
-
-	while (current)
+	// ³ëµå Á¦°Å ÇÔ¼ö.
+	void Delete(const T& data)
 	{
-	    if (current->data == data)
-	    {
-		break;
-	    }
-	    trail = current;
-            current = current->next;
+		// ¿¹¿Ü Ã³¸® (ºó ¸®½ºÆ®´Â Áö¿ï°Ô ¾øÀ½).
+		if (!head)
+		{
+			std::cout << "List is empty.\n";
+			return;
+		}
+
+		// »èÁ¦ÇÒ ³ëµå °Ë»ö.
+		NodeType current = head;
+		NodeType trail = nullptr;
+
+		while (current)
+		{
+			// °ª ºñ±³.
+			if (current->data == data)
+			{
+				break;
+			}
+
+			// ´ÙÀ½ ³ëµå·Î °Ë»ö ÀÌ¾î°¡±â.
+			trail = current;
+			current = current->next;
+		}
+
+		// ¿¹¿ÜÃ³¸®.
+		if (!current)
+		{
+			// °Ë»ö ½ÇÆĞÇÑ °æ¿ì.
+			std::cout << "Failed to find the node.\n";
+			return;
+		}
+
+		// »èÁ¦ÇÒ ³ëµå°¡ ÇìµåÀÎ °æ¿ì.
+		if (head == current)
+		{
+			// ±âÁ¸ ÇìµåÀÇ ´ÙÀ½ ³ëµå¸¦ »õ Çìµå·Î ¼³Á¤.
+			head = head->next;
+		}
+
+		// Çìµå°¡ ¾Æ´Ñ °æ¿ì.
+		else
+		{
+			// Æ÷ÀÎÅÍ Á¤¸®.
+			trail->next = current->next;
+		}
+
+		// ¸Ş¸ğ¸® ÇØÁ¦.
+		delete current;
+
+		// Á¦°Å Ã³¸®.
+		--count;
 	}
 
-	// ì‚­ì œí•  ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°.
-	if (!current)
+	// Ãâ·Â ÇÔ¼ö.
+	void Print()
 	{
-	        std::cout << "Data not found. Cannot delete.\n";
-                return;
+		// Ã³À½ºÎÅÍ ¼øÈ¸ÇÏ¸é¼­ °ª Ãâ·Â.
+		NodeType current = head;
+
+		// ¼øÈ¸.
+		while (current)
+		{
+			// ÇöÀç ³ëµåÀÇ °ª Ãâ·Â.
+			std::cout << "Data: " << current->data << "\n";
+
+			// ´ÙÀ½ ³ëµå·Î ÀÌµ¿.
+			current = current->next;
+		}
 	}
-        // ì‚­ì œí•  ë…¸ë“œê°€ í—¤ë“œì¸ ê²½ìš°.
-	if (current == head)
-	{
-	    // Test.
-
-            // í—¤ë“œë¥¼ ë‹¤ìŒ ë…¸ë“œë¡œ ë³€ê²½.
-	    head = head->next;
-	}
-
-	// ì‚­ì œí•  ë…¸ë“œê°€ í—¤ë“œê°€ ì•„ë‹Œ ê²½ìš°.
-	else
-	{
-	    // Test.
-
-	    // í¬ì¸í„° ì •ë¦¬
-	    trail->next = current->next;
-	}
-	    delete current;
-	    --count;
-    }
-
-    // ì¶œë ¥ í•¨ìˆ˜.
-    void Print()
-    {
-	// ì²˜ìŒë¶€í„° ìˆœíšŒí•˜ë©´ì„œ ê°’ ì¶œë ¥.
-	NodeType current = head;
-
-	// ìˆœíšŒ.
-	while (current)
-	{
-	    // í˜„ì¬ ë…¸ë“œì˜ ê°’ ì¶œë ¥.
-	    std::cout << "Data: " << current->data << "\n";
-
-	    // ë‹¤ìŒ ë…¸ë“œë¡œ ì´ë™.
-	    current = current->next;
-	}
-    }
 
 private:
-    // í—¤ë“œ(ë¨¸ë¦¬) ë…¸ë“œ.
-    //Node<T>* head = nullptr;
-    NodeType head = nullptr;
+	// Çìµå(¸Ó¸®) ³ëµå.
+	//Node<T>* head = nullptr;
+	NodeType head = nullptr;
 
-    // ì—°ê²° ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ëœ í•­ëª©ì˜ ìˆ˜.
-    int count = 0;
+	// ¿¬°á ¸®½ºÆ®¿¡ ÀúÀåµÈ Ç×¸ñÀÇ ¼ö.
+	int count = 0;
 };

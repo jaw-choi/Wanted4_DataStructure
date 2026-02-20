@@ -1,220 +1,225 @@
-ï»¿#pragma once
+#pragma once
 
 #include <iostream>
 #include <cassert>
 
-// ìë™ìœ¼ë¡œ í¬ê¸°ê°€ ëŠ˜ì–´ë‚˜ëŠ” ë°°ì—´ (List/Vector).
-
+// ¹İº¹ÀÚ.
 template<typename List>
 class ListIterator
 {
 public:
-    // íƒ€ì… ì•Œë¦¬ì•„ì‹± ì§€ì •.
-    // Listê°€ í…œí”Œë¦¿ íŒŒë¼ë¯¸í„°ë¡œ ë„˜ì–´ì˜¤ëŠ” ê²½ìš° typename í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•´ì•¼ í•¨.
-    using ValueType = typename List::ValueType;
-    using PointerType = ValueType*;
-    using ReferenceType = ValueType&;
+	// Å¸ÀÔ ¾Ë¸®¾Æ½Ì ÁöÁ¤.
+	// List°¡ ÅÛÇÃ¸´ ÆÄ¶ó¹ÌÅÍ·Î ³Ñ¾î¿À´Â °æ¿ì typename ±îÁö ÁöÁ¤.
+	using ValueType = typename List::ValueType;
+	using PointerType = ValueType*;
+	using ReferenceType = ValueType&;
 
 public:
-    ListIterator(PointerType ptr) : ptr(ptr) {}
+	ListIterator(PointerType ptr)
+		: ptr(ptr)
+	{
+	}
 
+	// ¿¬»êÀÚ ¿À¹ö·Îµù.
 
-    // ì „ìœ„ ì¦ê°€ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    ListIterator& operator++()
-    {
-        ++ptr;
-        return *this;
-    }
-    // í›„ìœ„ ì¦ê°€ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.  
-    ListIterator operator++(int)
-    {
-        // ì¦ê°€ ì´ì „ì˜ ìƒíƒœë¥¼ ë³µì‚¬.
-        ListIterator temp = *this;
+	// ÀüÀ§ Áõ°¡ ¿¬»êÀÚ.
+	ListIterator& operator++()
+	{
+		++ptr;
+		return *this;
+	}
 
-        // ë‚´ë¶€ í¬ì¸í„° ì¦ê°€.
-        ++(*this);
-        // ì¦ê°€ ì´ì „ ìƒíƒœ ë°˜í™˜.
-        return temp;
-    }
+	// ÈÄÀ§ Áõ°¡ ¿¬»êÀÚ.
+	ListIterator& operator++(int)
+	{
+		// ÇöÀç ¹İº¹ÀÚ¸¦ ÀÓ½Ã ÀúÀå.
+		ListIterator iterator = *this;
 
-    // ì „ìœ„ ê°ì†Œ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    ListIterator& operator--()
-    {
-        --ptr;
-        return *this;
-    }
-    // í›„ìœ„ ê°ì†Œ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.  
-    ListIterator operator--(int)
-    {
-        // ê°ì†Œ ì´ì „ì˜ ìƒíƒœë¥¼ ë³µì‚¬.
-        ListIterator temp = *this;
+		// ³»ºÎ Æ÷ÀÎÅÍ ++ Ã³¸®.
+		++(*this);
 
-        // ë‚´ë¶€ í¬ì¸í„° ê°ì†Œ.
-        --(*this);
-        // ê°ì†Œ ì´ì „ ìƒíƒœ ë°˜í™˜.
-        return temp;
-    }
+		// ¾Õ¼­ ÀúÀåÇß´ø ¹İº¹ÀÚ ¹İÈ¯.
+		return iterator;
+	}
 
-    // ì¸ë±ìŠ¤ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    ReferenceType operator[](int index)
-    {
-        return *(ptr + index);
-    }
+	// ÀüÀ§ °¨¼Ò ¿¬»êÀÚ.
+	ListIterator& operator--()
+	{
+		--ptr;
+		return *this;
+	}
 
-    //-> ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.  
-    PointerType operator->()
-    {
-        return ptr;
-    }
+	// ÈÄÀ§ °¨¼Ò ¿¬»êÀÚ.
+	ListIterator& operator--(int)
+	{
+		// ÇöÀç ¹İº¹ÀÚ¸¦ ÀÓ½Ã ÀúÀå.
+		ListIterator iterator = *this;
 
-    // ì—­ì°¸ì¡° ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    ReferenceType operator*()
-    {
-        return *ptr;
-    }
+		// ³»ºÎ Æ÷ÀÎÅÍ -- Ã³¸®.
+		--(*this);
 
-    // ë¹„êµ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    bool operator==(const ListIterator& other) const
-    {
-        return ptr == other.ptr;
-    }
+		// ¾Õ¼­ ÀúÀåÇß´ø ¹İº¹ÀÚ ¹İÈ¯.
+		return iterator;
+	}
 
-    bool operator!=(const ListIterator& other) const
-    {
-        return !(*this == other);
-    }
+	ReferenceType operator[](int index)
+	{
+		return *(ptr + index);
+	}
 
+	PointerType operator->()
+	{
+		return ptr;
+	}
 
+	ReferenceType operator*()
+	{
+		return *ptr;
+	}
+
+	// ºñ±³ ¿¬»êÀÚ ¿À¹ö·Îµù.
+	bool operator==(const ListIterator& other) const
+	{
+		return ptr == other.ptr;
+	}
+
+	bool operator!=(const ListIterator& other) const
+	{
+		return !(*this == other);
+	}
 
 private:
-    PointerType ptr = nullptr;
+	// ¹İº¹ÀÚ´Â °á±¹ Æ÷ÀÎÅÍ.
+	PointerType ptr = nullptr;
 };
 
+// ÀÚµ¿À¸·Î Å©±â°¡ ´Ã¾î³ª´Â ¹è¿­ (List/Vector).
 template<typename T>
 class List
 {
+	// Å¸ÀÔ ¾Ë¸®¾Æ½Ì ÁöÁ¤.
 public:
-    using ValueType = T;
-    using Iterator = ListIterator< List<T> >;
+	using ValueType = T;
+	using Iterator = ListIterator< List<T> >;
+
 public:
-    List()
-    {
-        // ì €ì¥ ê³µê°„ í• ë‹¹.
-        Reallocate(capacity);
-        //data = new T[capacity];
-        //memset(data, 0, sizeof(T) * capacity);
-    }
+	List()
+	{
+		// ÀúÀå °ø°£ ÇÒ´ç.
+		Reallocate(capacity);
+		//data = new T[capacity];
+		//memset(data, 0, sizeof(T) * capacity);
+	}
 
-    ~List()
-    {
-        // ìì› í•´ì œ.
-        if (data)
-        {
-            delete[] data;
-        }
-    }
+	~List()
+	{
+		// ÀÚ¿ø ÇØÁ¦.
+		if (data)
+		{
+			delete[] data;
+		}
+	}
 
-    // ê°’ ì¶”ê°€ í•¨ìˆ˜.
-    void Add(const T& value)
-    {
-        // í¬ê¸°ê°€ ë¶€ì¡±í•œì§€ í™•ì¸ (ê°€ë“ì°¬ ìƒíƒœì¸ì§€ í™•ì¸).
-        if (size == capacity)
-        {
-            // í¬ê¸° ì¬í• ë‹¹ (2ë°° í¬ê¸°ë¡œ ì¬í• ë‹¹).
-            Reallocate(capacity * 2);
-        }
+	// °ª Ãß°¡ ÇÔ¼ö.
+	void Add(const T& value)
+	{
+		// Å©±â°¡ ºÎÁ·ÇÑÁö È®ÀÎ (°¡µæÂù »óÅÂÀÎÁö È®ÀÎ).
+		if (size == capacity)
+		{
+			// Å©±â ÀçÇÒ´ç (2¹è Å©±â·Î ÀçÇÒ´ç).
+			Reallocate(capacity * 2);
+		}
 
-        // í•­ëª© ì¶”ê°€.
-        data[size] = value;
+		// Ç×¸ñ Ãß°¡.
+		data[size] = value;
+		
+		// ÀúÀåµÈ Ç×¸ñ ¼ö Áõ°¡ Ã³¸®.
+		++size;
+	}
 
-        // ì €ì¥ëœ í•­ëª© ìˆ˜ ì¦ê°€ ì²˜ë¦¬.
-        ++size;
-    }
+	void Add(T&& value)
+	{
+		// Å©±â°¡ ºÎÁ·ÇÑÁö È®ÀÎ (°¡µæÂù »óÅÂÀÎÁö È®ÀÎ).
+		if (size == capacity)
+		{
+			// Å©±â ÀçÇÒ´ç (2¹è Å©±â·Î ÀçÇÒ´ç).
+			Reallocate(capacity * 2);
+		}
 
-    void Add(T&& value)
-    {
-        // í¬ê¸°ê°€ ë¶€ì¡±í•œì§€ í™•ì¸ (ê°€ë“ì°¬ ìƒíƒœì¸ì§€ í™•ì¸).
-        if (size == capacity)
-        {
-            // í¬ê¸° ì¬í• ë‹¹ (2ë°° í¬ê¸°ë¡œ ì¬í• ë‹¹).
-            Reallocate(capacity * 2);
-        }
+		// °ªÀ» ÀúÀåÇÒ ¶§ ÀÌµ¿ Ã³¸®.
+		data[size] = std::move(value);
 
-        // ê°’ì„ ì €ì¥í•  ë•Œ ì´ë™ ì²˜ë¦¬.
-        data[size] = std::move(value);
+		// ÀúÀåµÈ Ç×¸ñ ¼ö Áõ°¡ Ã³¸®.
+		++size;
+	}
 
-        // ì €ì¥ëœ í•­ëª© ìˆ˜ ì¦ê°€ ì²˜ë¦¬.
-        ++size;
-    }
+	// ÀÎµ¦½º ¿¬»êÀÚ ¿À¹ö·Îµù.
+	T& operator[](int index)
+	{
+		// index ¹üÀ§ È®ÀÎ.
+		//assert(index < 0 || index >= size);
+		assert(index >= 0 && index < size);
+		return data[index];
+	}
 
-    // ì¸ë±ìŠ¤ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©.
-    T& operator[](int index)
-    {
-        // index ë²”ìœ„ í™•ì¸.
-        // assertëŠ” í†µê³¼ ì¡°ê±´ì„ ë„£ì–´ì•¼ í•¨.
-        assert(index >= 0 && index < size);
-        //assert(index < 0 || index >= size);
-        return data[index];
-    }
+	// Getter.
+	int Size() const { return size; }
+	int Capacity() const { return capacity; }
 
-    // Getter.
-    int Size() const { return size; }
-    int Capacity() const { return capacity; }
+	// ¹üÀ§ ±â¹İ ·çÇÁ Ã³¸®¸¦ À§ÇÑ ÇÔ¼ö ÀÛ¼º (begin/end).
+	// ¹è¿­ÀÇ Ã¹ À§Ä¡¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
+	Iterator begin()
+	//T* begin()
+	{
+		return Iterator(data);
+		//return data;
+	}
 
-    // ë²”ìœ„ ê¸°ë°˜ ë£¨í”„ ì²˜ë¦¬ë¥¼ ìœ„í•œ í•¨ìˆ˜ ì‘ì„± (begin/end).
-    // ë°°ì—´ì˜ ì²« ìœ„ì¹˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
-    Iterator begin()
-    //T* begin()
-    {
-        //return Iterator(data);
-        return data;
-    }
-
-    // ë°°ì—´ì— ì €ì¥ëœ ë§ˆì§€ë§‰ ìš”ì†Œì˜ ë‹¤ìŒ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜.
-    //Iterator end()
-    T* end()
-    {
-        return data + size;
-    }
-
+	// ¹è¿­¿¡ ÀúÀåµÈ ¸¶Áö¸· ¿ä¼ÒÀÇ ´ÙÀ½ À§Ä¡¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö.
+	Iterator end()
+	//T* end()
+	{
+		return Iterator(data + size);
+		//return data + size;
+	}
 
 private:
-    // ì €ì¥ ê³µê°„ í• ë‹¹(ì¬í• ë‹¹)í•˜ëŠ” í•¨ìˆ˜.
-    void Reallocate(int newCapacity)
-    {
-        // 1. ì´ì£¼í•  ìƒˆë¡œìš´ ê³µê°„ í• ë‹¹ (new).
-        T* newBlock = new T[newCapacity];
-        memset(newBlock, 0, sizeof(T) * newCapacity);
+	// ÀúÀå °ø°£ ÇÒ´ç(ÀçÇÒ´ç)ÇÏ´Â ÇÔ¼ö.
+	void Reallocate(int newCapacity)
+	{
+		// 1. ÀÌÁÖÇÒ »õ·Î¿î °ø°£ ÇÒ´ç (new).
+		T* newBlock = new T[newCapacity];
+		memset(newBlock, 0, sizeof(T) * newCapacity);
 
-        if (newCapacity < size)
-        {
-            size = newCapacity;
-        }
+		if (newCapacity < size)
+		{
+			size = newCapacity;
+		}
 
-        // 2. ê¸°ì¡´ í•­ëª©ì„ ìƒˆë¡œìš´ ê³µê°„ì— ë³µì‚¬/ì´ë™.
-        //for (int ix = 0; ix < size; ++ix)
-        //{
-        //	newBlock[ix] = data[ix];
-        //}
-        // ë©”ëª¨ë¦¬ ë³µì‚¬.
-        if (data)
-        {
-            memcpy(newBlock, data, sizeof(T) * size);
-        }
+		// 2. ±âÁ¸ Ç×¸ñÀ» »õ·Î¿î °ø°£¿¡ º¹»ç/ÀÌµ¿.
+		//for (int ix = 0; ix < size; ++ix)
+		//{
+		//	newBlock[ix] = data[ix];
+		//}
+		// ¸Ş¸ğ¸® º¹»ç.
+		if (data)
+		{
+			memcpy(newBlock, data, sizeof(T) * size);
+		}
 
-        // 3. ê¸°ì¡´ ë°°ì—´ ê³µê°„ í•´ì œ.
-        delete[] data;
-        data = newBlock;
-        capacity = newCapacity;
-    }
+		// 3. ±âÁ¸ ¹è¿­ °ø°£ ÇØÁ¦.
+		delete[] data;
+		data = newBlock;
+		capacity = newCapacity;
+	}
 
 private:
-    // í™ì— í• ë‹¹ë˜ëŠ” ë°°ì—´ì„ ê´€ë¦¬í•  í¬ì¸í„° ë³€ìˆ˜.
-    T* data = nullptr;
+	// Èü¿¡ ÇÒ´çµÇ´Â ¹è¿­À» °ü¸®ÇÒ Æ÷ÀÎÅÍ º¯¼ö.
+	T* data = nullptr;
 
-    // ë°°ì—´ì— ì €ì¥ëœ í•­ëª©ì˜ ìˆ˜.
-    int size = 0;
+	// ¹è¿­¿¡ ÀúÀåµÈ Ç×¸ñÀÇ ¼ö.
+	int size = 0;
 
-    // ë°°ì—´ ì €ì¥ ê³µê°„ì˜ í¬ê¸°.
-    int capacity = 2;
+	// ¹è¿­ ÀúÀå °ø°£ÀÇ Å©±â.
+	int capacity = 2;
 };
