@@ -1,51 +1,51 @@
-ï»¿#include <iostream>
+#include <iostream>
 #include <cassert>
-#include <vector>
+#include <array>
 
-// í…œí”Œë¦¿ìœ¼ë¡œ ë°°ì—´ ë§Œë“¤ê¸°.
-template<typename T,size_t size = 10> // size_t => unsigned long long
-
-class Array {
+// ÅÛÇÃ¸´À¸·Î ¹è¿­ ¸¸µé±â.
+template<typename T, size_t size = 5>
+class Array
+{
 public:
-    size_t Size() const {
-        return size;
-    }
+	size_t Size() const
+	{
+		return size;
+	}
 
-    T& operator[](size_t index) {
-        
-        // ì–´ì¨íŠ¸( ê¼­ ê²€ì¦ì´ í•„ìš”í•œ êµ¬ë¬¸ì— í™œìš©).
-        // ë””ë²„ê·¸ ëª¨ë“œì—ì„œë§Œ ë™ì‘.
-        assert(index < 0 || index >= size);//ì•„ë˜ êµ¬ë¬¸ê³¼ ë™ì¼
-        //if (index < 0 || index >= size) 
-        //{
-        //    __debugbreak();
-        //}
-        
-        return data[index];
-    }
+	// ¹è¿­ ¿¬»êÀÚ ¿À¹ö·Îµù.
+	T& operator[](size_t index)
+	{
+		// ¾î½áÆ®(²À °ËÁõÀÌ ÇÊ¿äÇÑ ±¸¹®¿¡ È°¿ë).
+		// µğ¹ö±× ¸ğµå¿¡¼­¸¸ µ¿ÀÛ.
+		assert(index < 0 || index >= size);
 
-    const T& operator[](size_t index) const {
-        return data[index];
-    }
+		// ÀÎµ¦½º ¹üÀ§ È®ÀÎ.
+		//if (index < 0 || index >= size)
+		//{
+		//	__debugbreak();
+		//}
+
+		return data[index];
+	}
+
+	const T& operator[](size_t index) const
+	{
+		return data[index];
+	}
 
 private:
-    T data[size] = {};
+	// ¹è¿­ º¯¼ö.
+	T data[size] = {};
 };
 
+int main()
+{
+	// ¹è¿­ º¯¼ö ¼±¾ğ.
+	Array<int, 5> array;
+	array[3] = 20;
 
-int main() {
-    
-        
-    Array<int,10> array; // size = 10
-    //std::cout << array.Size();
-    //std::cout << array[0];
-    
-    //const auto& arrayReference = array;
+	// const Á¢±Ù.
+	const auto& arrayReference = array;
 
-    std::vector<int> a;
-    std::cout << a.size() << " " << sizeof(a) << " " << a.capacity() << std::endl;
-                                        //ì™œ sizeof(a) 32?? 
-                                        //=> x64bit í™˜ê²½ì´ë¼ì„œ 8ë°”ì´íŠ¸ í¬ì¸í„° 4ê°œ = 32ë°”ì´íŠ¸
-
-    return 0;
+	std::cin.get();
 }

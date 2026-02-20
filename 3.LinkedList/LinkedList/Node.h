@@ -1,29 +1,32 @@
-ï»¿#pragma once
+#pragma once
 
-// ë°ì´í„° í•„ë“œ/ë§í¬ í•„ë“œë¥¼ ê°–ëŠ” ë…¸ë“œ í´ë˜ìŠ¤.
-// ì—°ê²° ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ë˜ëŠ” í•­ëª©.
+// µ¥ÀÌÅÍ ÇÊµå/¸µÅ© ÇÊµå¸¦ °®´Â ³ëµå Å¬·¡½º.
+// ¿¬°á ¸®½ºÆ®¿¡ ÀúÀåµÇ´Â Ç×¸ñ.
 template<typename T>
 class Node
 {
-    // ì—°ê²° ë¦¬ìŠ¤íŠ¸ friend ì„ ì–¸.
-    template<typename T>
-    friend class LinkedList;
+	// ¿¬°á ¸®½ºÆ® friend ÁöÁ¤.
+	template<typename T>
+	friend class LinkedList;
 
-    // ë…¸ë“œì˜ ìƒì„±ì€ LinkedList í´ë˜ìŠ¤ì—ì„œë§Œ ê°€ëŠ¥í•˜ë„ë¡ private ìœ¼ë¡œ ì„¤ì •.
+	// ³ëµåÀÇ »ı¼ºÀº LinkedList¿¡¼­¸¸ °¡´ÉÇÏµµ·Ï privateÀ¸·Î ÁöÁ¤.
 private:
+	Node()
+		: data(), next(nullptr)
+	{
+	}
 
-    Node()
-    {
-    }
-    Node(T data)
-        : data(data), next(nullptr)
-    {
-    }
-
+	Node(T data)
+		: data(data), next(nullptr)
+	{
+	}
 
 private:
-    // ë°ì´í„° í•„ë“œ.
-    T data;
-    // ë‹¤ìŒ ë…¸ë“œë¥¼ ê°€ë¦¬í‚¤ëŠ” ë§í¬ í•„ë“œ.
-    Node* next = nullptr;
+	// µ¥ÀÌÅÍ ÇÊµå.
+	T data;
+
+	// ¸µÅ© ÇÊµå.
+	Node* next = nullptr;
 };
+
+//#include "Node.inl"
