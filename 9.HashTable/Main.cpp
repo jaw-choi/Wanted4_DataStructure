@@ -1,35 +1,41 @@
 ﻿#include "Container/HashTable.h"
 #include <iostream>		// std::cout.
-#include <Windows.h>	// 콘솔 제어를 위해 활용.
-
-
-// 콘솔 화면 지우는 함수.
-void ClearScreen()
-{
-    // 콘솔 명령어 cls 실행.
-    system("cls");
-}
-
-// 텍스트 색상 지정 함수.
-void SetConsoleColor(WORD color)
-{
-    SetConsoleTextAttribute(
-	GetStdHandle(STD_OUTPUT_HANDLE),
-	color
-    );
-}
 
 
 
 int main()
 {
-    // 커서 끄기.
-    CONSOLE_CURSOR_INFO info;
-    info.dwSize = 1;
-    info.bVisible = FALSE;
-    SetConsoleCursorInfo(
-	GetStdHandle(STD_OUTPUT_HANDLE),
-	&info
-    );
+    HashTable table;
 
+    table.Add("name", "Jae");
+    table.Add("age", "29");
+    table.Add("age", "27");
+    table.Add("job", "programmer");
+    table.Add("hobby", "game");
+    table.Add("hobby", "movie");
+    table.Print();
+
+    Pair<std::string, std::string> outEntry;
+    if (table.Find("name", outEntry))
+    {
+        std::cout << "검색 성공. Key: " << outEntry.key << " | Value: " << outEntry.value << "\n";
+    }
+    else
+    {
+        std::cout << "검색 실패. 해당 키를 찾을 수 없음.\n";
+    }
+
+
+    //if (table.Delete("age"))
+    //{
+    //    std::cout << "삭제 성공. Key: age\n";
+    //}
+    //else
+    //{
+    //    std::cout << "삭제 실패. 해당 키를 찾을 수 없음.\n";
+    //}
+
+
+    table.Print();
+    return 0;
 }

@@ -16,10 +16,10 @@ public:
 	~HashTable();
 
         // 키-값 쌍 추가 함수.
-        void Add(const std::string& key, const std::string& value);
+        bool Add(const std::string& key, const std::string& value);
         
         // 삭제 - 키에 해당하는 키-값 쌍 삭제 함수.
-	void Delete(const std::string& key);
+	bool Delete(const std::string& key);
 
         // 검색 - 키에 해당하는 값 반환 함수.
         bool Find(const std::string& key, Entry& outEntry);
