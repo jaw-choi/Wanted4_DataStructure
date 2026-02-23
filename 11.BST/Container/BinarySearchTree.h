@@ -1,6 +1,13 @@
 ﻿#pragma once
 
 #include "Node.h"
+#ifdef _DEBUG
+#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#else
+#define new new
+#endif
 
 // 이진 탐색 트리 클래스.
 template<typename T>
@@ -13,7 +20,8 @@ public:
 
     ~BinarySearchTree()
     {
-        // Todo: 트리 제거 함수 구현 후 호출.
+        // 트리 제거 함수 구현 후 호출.
+        Destroy();
     }
 
     // 삽입.
@@ -46,14 +54,14 @@ public:
     // 삭제.
     bool DeleteNode(const T& deleteData)
     {
-        // Todo: 재귀 삭제 함수 구현 후 호출.
+        // 재귀 삭제 함수 호출.
         return DeleteNodeRecursive(root, deleteData, root);
     }
 
     // 검색.
     bool SearchNode(const T& data, Node<T>*& outNode)
     {
-        // 검색 재귀함수 구현 후 호출.
+        // 검색 재귀함수 호출.
         return SearchNodeRecursive(root, data, outNode);
     }
     // 순회.
@@ -195,8 +203,43 @@ private:
         }
         return node;
     }
-
+    
     // 파괴 함수.
+    void Destroy()
+    {
+        if (!root)
+        {
+            return;
+        }
+        // 루트 노드부터 제거.
+        DestroyRecursive(root);
+    }
+    void DestroyRecursive(Node<T>* node)
+    {
+        // 종료 조건.
+        if (!node)
+        {
+            return;
+        }
+
+        // 없어도 되긴 함
+        // 자손이 없는 경우 처리.
+        if (!node->left && !node->right)
+        {
+            delete node;
+            return;
+        }
+
+        // 왼쪽 하위 트리 삭제.
+        DestroyRecursive(node->left);
+
+        // 오른쪽 하위 트리 삭제.
+        DestroyRecursive(node->right);
+
+        delete node;
+
+
+    }
 
 private:
     // 루트 노드.
