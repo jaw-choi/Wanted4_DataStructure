@@ -28,6 +28,10 @@ int main()
     tree.DeleteNode(30);
     tree.DeleteNode(10);
 
+    // 전위 순회(preorder traverse).
+    tree.PreorderTraverse();
+    tree.InorderTraverse();
+    tree.PostorderTraverse();
 
     return 0;
 }
